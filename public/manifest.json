@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "JobCredFill - Job credential filler",
+  "description": "Fills credentials on job boards",
+  "short_name": "JobCredFill",
+  "version": "1.0.0",
+  "author": {
+    "email": "this.is.aditeya@gmail.com"
+  },
+  "homepage_url": "https://example.com",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_title": "JobCredFill",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.myworkdayjobs.com/*/login*"],
+      "js": ["./scripts/workday_script.js"],
+      "all_frames": true
+    }
+  ],
+  "permissions": ["activeTab"]
+}
