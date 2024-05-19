@@ -1,0 +1,24 @@
+{
+  "theme_settings": [
+    {
+      "light": {
+        "base-100": "#ffffff",
+        "base-200": "#cccccc",
+        "base-content": "#000000",
+        "accent": "#A80874",
+        "info": "#0096FF",
+        "success": "#50C878"
+      }
+    },
+    {
+      "dark": {
+        "base-100": "#000000",
+        "base-200": "#808080",
+        "base-content": "#ffffff",
+        "accent": "#A80874",
+        "info": "#0096FF",
+        "success": "#50C878"
+      }
+    }
+  ]
+}
