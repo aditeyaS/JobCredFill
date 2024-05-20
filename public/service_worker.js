@@ -1,3 +1,5 @@
-chrome.runtime.onInstalled.addListener(()=>{
-    console.log("JobCredFill installed");
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === "install") {
+    chrome.tabs.create({ url: "https://jobcredfill.onrender.com" });
+  }
 });
