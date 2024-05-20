@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SunSVG from "../icons/SunSVG";
 import MoonSVG from "../icons/MoonSVG";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
@@ -25,7 +26,9 @@ const Header = () => {
   return (
     <div className="navbar bg-base-100 text-base-content px-5">
       <div className="navbar-start gap-2">
-        <h1 className="text-2xl text-accent font-bold">JobCredFill</h1>
+        <Link to="/" className="text-2xl text-accent font-bold">
+          JobCredFill
+        </Link>
       </div>
       <div className="navbar-end">
         <button className="btn-circle btn-sm p-1" onClick={onThemeChange}>

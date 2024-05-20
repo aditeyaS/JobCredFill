@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import IssuesModel from "../model/IssuesModel";
+import { Link } from "react-router-dom";
+import { EXTENSION_URL } from "../const/urls";
 
 export const github_owner = "aditeyaS";
 export const github_repo = "JobCredFill";
 
 const GITHUB_BASE_URL = `https://api.github.com/repos/${github_owner}/${github_repo}/issues`;
 
-const Main = () => {
+const Home = () => {
   const [issues, setIssues] = useState<IssuesModel[]>([]);
 
   useEffect(() => {
@@ -33,6 +35,10 @@ const Main = () => {
     );
   };
 
+  const onDownloadExtension = () => {
+    window.open(EXTENSION_URL, "_blank");
+  };
+
   return (
     <div className="flex flex-col gap-10 px-28 items-center w-full">
       <span className="text-8xl text-center -rotate-1 my-10">
@@ -40,9 +46,17 @@ const Main = () => {
         <span className="text-9xl text-accent"> JobCredFill</span>
       </span>
       <div>
-        <button className="btn btn-accent btn-lg text-base-100">
+        <button
+          className="btn btn-accent btn-lg text-base-100"
+          onClick={onDownloadExtension}
+        >
           Download chrome extension
         </button>
+      </div>
+      <div>
+        <Link to="/privacy" className="text-lg underline hover:text-blue-600">
+          Visit privacy policy.
+        </Link>
       </div>
       <div className="flex flex-col gap-8 w-full">
         <div className="flex justify-center">
@@ -106,4 +120,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;
