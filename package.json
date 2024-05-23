@@ -2,7 +2,7 @@
   "name": "jobcredfill",
   "description": "Fills credentials on job boards",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Aditeya Srivastava",
     "url": "https://www.linkedin.com/aditeya"

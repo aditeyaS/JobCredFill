@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "JobCredFill - Job credential filler",
+  "name": "JobCredFill - Job board credential filler",
   "description": "Fills credentials on job boards",
   "short_name": "JobCredFill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "email": "this.is.aditeya@gmail.com"
   },
@@ -20,10 +20,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.myworkdayjobs.com/*/login*"],
-      "js": ["./scripts/workday_script.js"],
+      "matches": ["<all_urls>"],
+      "js": ["./content_scripts/workday.js"],
       "all_frames": true
     }
   ],
-  "permissions": ["activeTab"]
+  "permissions": ["activeTab", "storage"],
+  "background": {
+    "service_worker": "service_worker.js"
+  }
 }

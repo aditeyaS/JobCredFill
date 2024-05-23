@@ -3,23 +3,24 @@ import Home from "./components/Home";
 import Settings from "./components/Settings";
 import TopBar from "./components/TopBar";
 import { UserDataModel, dummyUserData } from "./model/UserData";
-import store from "./const/store";
 
 const App = () => {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserDataModel>(dummyUserData);
 
   useEffect(() => {
-    const savedUserData = localStorage.getItem(store.USER_DATA);
-    if (savedUserData) {
-      const data: UserDataModel = JSON.parse(savedUserData);
-      setUserData(data);
-    }
+    chrome.storage.local.get("user-data", (storage) => {
+      const savedUserData = storage["user-data"];
+      if (savedUserData) {
+        const data: UserDataModel = JSON.parse(savedUserData);
+        setUserData(data);
+      }
+    });
   }, []);
 
   const onUpdateData = (newUserData: UserDataModel) => {
     setUserData(newUserData);
-    localStorage.setItem(store.USER_DATA, JSON.stringify(newUserData));
+    chrome.storage.local.set({ "user-data": JSON.stringify(newUserData) });
     setShowSettings(false);
   };
 

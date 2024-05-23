@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import SunSVG from "../icons/SunSVG";
 import MoonSVG from "../icons/MoonSVG";
-import store from "../const/store";
 
 const TopBar = () => {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
 
   useEffect(() => {
-    const previousTheme = localStorage.getItem(store.THEME) || "light";
-    if (previousTheme === "light") {
-      setDarkTheme(false);
-    } else {
-      setDarkTheme(true);
-    }
-    document.querySelector("html")?.setAttribute(store.THEME, previousTheme);
+    chrome.storage.local.get("data-theme", (storage) => {
+      const previousTheme = storage["data-theme"] || "light";
+      if (previousTheme === "light") {
+        setDarkTheme(false);
+      } else {
+        setDarkTheme(true);
+      }
+      document.querySelector("html")?.setAttribute("data-theme", previousTheme);
+    });
   }, []);
 
   const onThemeChange = () => {
     const newTheme = darkTheme ? "light" : "dark";
     setDarkTheme(!darkTheme);
-    document.querySelector("html")?.setAttribute(store.THEME, newTheme);
-    localStorage.setItem(store.THEME, newTheme);
+    document.querySelector("html")?.setAttribute("data-theme", newTheme);
+    chrome.storage.local.set({ "data-theme": JSON.stringify(newTheme) });
   };
 
   return (

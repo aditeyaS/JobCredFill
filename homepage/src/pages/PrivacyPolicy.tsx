@@ -30,11 +30,11 @@ const PrivacyPolicy = () => {
         </p>
         <ul className="list-disc ml-8">
           <li>Name</li>
-          <li>email</li>
+          <li>Email</li>
         </ul>
         <p className="font-semibold">
-          But everything is stored locally on your computer. We donot save
-          anything on out servers.
+          But everything is stored locally on your computer. We do not save
+          anything on our servers.
         </p>
       </div>
 

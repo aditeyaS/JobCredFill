@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { UserDataModel } from "../model/UserData";
+import sendMessage from "../service/sendMessage";
 
 interface HomeProps {
   showSettings: () => void;
@@ -8,7 +9,8 @@ interface HomeProps {
 
 const Home = ({ showSettings, data }: HomeProps) => {
   const [copiedLabel, setCopiedLabel] = useState<string>("");
-  const [fillResponse, setFillResponse] = useState<string>("");
+  const [response, setResponse] = useState<string>("");
+  const [responseSuccess, setResponseSuccess] = useState<boolean>(false);
 
   const onOpenSettings = () => {
     showSettings();
@@ -25,13 +27,14 @@ const Home = ({ showSettings, data }: HomeProps) => {
       active: true,
       lastFocusedWindow: true,
     });
-    console.log(tab);
-    if (tab && tab.id) {
-      const response = await chrome.tabs.sendMessage(tab.id, {
-        userData: data,
-      });
-      setFillResponse(response);
-      setTimeout(() => setFillResponse(""), 1500);
+    if (tab && tab.id && tab.url) {
+      const { response: res, responseSuccess: resSuccess } = await sendMessage(
+        tab.id,
+        tab.url
+      );
+      setResponse(res);
+      setResponseSuccess(resSuccess);
+      setTimeout(() => setResponse(""), 1500);
     }
   };
 
@@ -56,7 +59,7 @@ const Home = ({ showSettings, data }: HomeProps) => {
           }`}
           onClick={() => onCopy(data.password, "password")}
         >
-          {data.password}
+          {"*".repeat(data.password.length)}
         </span>
       </div>
       <div className="flex flex-row justify-end">
@@ -67,13 +70,17 @@ const Home = ({ showSettings, data }: HomeProps) => {
           Incorrect data? Update it.
         </button>
       </div>
-      {fillResponse == "" ? (
+      {response == "" ? (
         <></>
       ) : (
-        <div className="bg-success flex justify-center mt-2">
-          <span className="text-xs p-0.5">
-            {fillResponse}
-          </span>
+        <div
+          className={`${
+            responseSuccess
+              ? "bg-success text-success-content"
+              : "bg-error text-error-content"
+          } flex justify-center mt-2`}
+        >
+          <span className="text-xs p-0.5">{response}</span>
         </div>
       )}
       <button

@@ -1,10 +1,11 @@
 {
   "name": "jobcredfill-homepage",
+  "description": "Homepage for JobCredFill",
   "private": false,
   "author": {
     "name": "Aditey Srivastava"
   },
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
