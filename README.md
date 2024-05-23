@@ -23,6 +23,6 @@
   </div>
   <p align="center">
     Want to contribute?
-    <a href="https://github.com/aditeyaS/JobCredFill/edit/main/CONTRIBUTING.md">Read contribution guidelines.</a>
+    <a href="https://github.com/aditeyaS/JobCredFill/blob/main/CONTRIBUTING.md">Read contribution guidelines.</a>
   </p>
 </p>
